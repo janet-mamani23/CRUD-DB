@@ -2,7 +2,7 @@ var express = require('express');
 
 const listPersonas = (req, res, next) => {
     const db = req.app.get("db");
-    const query = "SELECT * from persona";
+    const query ="SELECT persona.nombre, persona.email, oficina.denominacion FROM persona JOIN oficina WHERE persona.oficina_id = oficina.id";
     db.query(query, function(err, rows) {
         if (err) {
             console.log(err);
@@ -10,6 +10,7 @@ const listPersonas = (req, res, next) => {
         }
         res.render("personas", { personas: rows, title: "Lista" });
     })
+    //const query = "SELECT * from persona";
 }
 
 const agregarPersona = function(req, res, next) {
@@ -94,6 +95,35 @@ const buscarPersonaResultados = (req, res, next) => {
     });
 }
 
+const listOficinas = (req, res, next) => {
+    const db = req.app.get("db");
+    const query ="SELECT * from oficina";
+    db.query(query, function(err, rows) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.render("oficinas", { oficinas: rows, title: "Lista" });
+    })
+    //const query = "SELECT * from persona";
+}
+const agregarOficina = function(req, res, next) {
+    res.render('agregarOficina', { title: "Agregar" });
+}
+
+const postAgregarOficina = function(req, res, next) {
+    const db = req.app.get("db");
+    const denominacion = req.body.denominacion;
+    const query = "INSERT into oficina (denominacion) VALUES (?)";
+    db.query(query, [denominacion], function(err) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.redirect("/oficinas");
+    })
+}
+
 
 module.exports = {
     listPersonas,
@@ -104,5 +134,8 @@ module.exports = {
     getDeletePersona,
     postDeletePersona,
     buscarPersona,
-    buscarPersonaResultados
+    buscarPersonaResultados,
+    listOficinas,
+    agregarOficina,
+    postAgregarOficina
 };
