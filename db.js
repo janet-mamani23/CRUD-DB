@@ -2,8 +2,8 @@
 const mysql = require('mysql2');
 
 const db = mysql.createConnection({
-    //host: 'localhost',
-    host: 'mysql',
+    host: 'localhost',
+    //host: 'mysql',
     user: 'root',
     password: '2103',
 });
@@ -16,7 +16,7 @@ db.connect((err) => {
     }
 
     // Verificar si existe la base de datos
-    db.query("CREATE DATABASE IF NOT EXISTS cruddb2", (err) => {
+    db.query("CREATE DATABASE IF NOT EXISTS cruddb", (err) => {
         if (err) {
             console.log("Error al crear la db");
             return;
@@ -40,9 +40,8 @@ db.connect((err) => {
             nombre VARCHAR(255),
             email VARCHAR(255),
             id_oficina INT,
-            FOREIGN KEY (id_oficina) REFERENCES oficina(id)
-        ) 
-    `;
+            FOREIGN KEY (id_oficina) REFERENCES oficina(id_O)
+        )`;
 
     db.query(createTableSQLpersona, (err) => {
         if (err) {
@@ -54,7 +53,7 @@ db.connect((err) => {
     //Verifica si existe la tabla oficina
     const createTableSQLoficina = `
         CREATE TABLE IF NOT EXISTS oficina (
-            id INT AUTO_INCREMENT PRIMARY KEY,
+            id_O INT AUTO_INCREMENT PRIMARY KEY,
             denominacion VARCHAR(255)            
         )`;
     

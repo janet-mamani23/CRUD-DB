@@ -2,7 +2,7 @@ var express = require('express');
 
 const listPersonas = (req, res, next) => {
     const db = req.app.get("db");
-    const query ="SELECT persona.nombre, persona.email, oficina.denominacion FROM persona JOIN oficina WHERE persona.oficina_id = oficina.id";
+    const query ="SELECT persona.nombre, persona.email, oficina.denominacion FROM persona JOIN oficina WHERE persona.id_oficina = oficina.id_O";
     db.query(query, function(err, rows) {
         if (err) {
             console.log(err);
