@@ -4,8 +4,8 @@
 <%- include('./head.ejs') %>
 
     <body>
-        <h1>Desea eliminar este registro de persona?</h1>
-        <form action="/delete/<%= item.id %>" method="post">
+        <h1>Confirma que desea eliminar ese registro de oficina?</h1>
+        <form action="/deleteOficina/<%= item.id %>" method="post">
             <button type="submit">Confirmar</button>
         </form>
 

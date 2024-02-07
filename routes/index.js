@@ -19,6 +19,10 @@ router.post('/resultados', controllers.buscarPersonaResultados);
 router.get('/oficinas', controllers.listOficinas);
 router.get('/agregarOficina', controllers.agregarOficina);
 router.post("/agregarOficina", controllers.postAgregarOficina);
+router.get('/editOficina/:id', controllers.getEditarOficina);
+router.post('/updateOficina/:id', controllers.postUpdateOficina);
+router.get('/deleteOficina/:id', controllers.getDeleteOficina);
+router.post('/deleteOficina/:id', controllers.postDeleteOficina);
 
 
 module.exports = router;

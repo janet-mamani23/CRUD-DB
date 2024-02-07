@@ -33,27 +33,11 @@ db.connect((err) => {
         console.log("Conexion exitosa");
     });
     
-    // Verificar si existe la tabla persona
-    const createTableSQLpersona = `
-        CREATE TABLE IF NOT EXISTS persona (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            nombre VARCHAR(255),
-            email VARCHAR(255),
-            id_oficina INT,
-            FOREIGN KEY (id_oficina) REFERENCES oficina(id_O)
-        )`;
-
-    db.query(createTableSQLpersona, (err) => {
-        if (err) {
-            console.log("Error al crear la tabla persona");
-            return;
-        }
-    });
-
+    
     //Verifica si existe la tabla oficina
     const createTableSQLoficina = `
         CREATE TABLE IF NOT EXISTS oficina (
-            id_O INT AUTO_INCREMENT PRIMARY KEY,
+            id INT AUTO_INCREMENT PRIMARY KEY,
             denominacion VARCHAR(255)            
         )`;
     
@@ -63,7 +47,23 @@ db.connect((err) => {
             return;
         }
         });
+     // Verificar si existe la tabla persona
+    const createTableSQLpersona = `
+     CREATE TABLE IF NOT EXISTS persona (
+         id INT AUTO_INCREMENT PRIMARY KEY,
+         nombre VARCHAR(255),
+         email VARCHAR(255),
+         oficina_id INT,
+         FOREIGN KEY (oficina_id) REFERENCES oficina(id)
+     )
+`;
 
+    db.query(createTableSQLpersona, (err) => {
+        if (err) {
+            console.log("Error al crear la tabla persona");
+            return;
+        }
+    });
 
 });
 

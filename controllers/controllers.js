@@ -2,7 +2,7 @@ var express = require('express');
 
 const listPersonas = (req, res, next) => {
     const db = req.app.get("db");
-    const query ="SELECT persona.nombre, persona.email, oficina.denominacion FROM persona JOIN oficina WHERE persona.id_oficina = oficina.id_O";
+    const query ="SELECT persona.nombre, persona.email, oficina.denominacion FROM persona JOIN oficina WHERE persona.oficina_id = oficina.id";
     db.query(query, function(err, rows) {
         if (err) {
             console.log(err);
@@ -21,8 +21,9 @@ const postAgregarPersona = function(req, res, next) {
     const db = req.app.get("db");
     const nombre = req.body.nombre;
     const email = req.body.email;
-    const query = "INSERT into persona (nombre, email) VALUES (?, ?)";
-    db.query(query, [nombre, email], function(err) {
+    const oficina_id = req.body.oficina_id;
+    const query = "INSERT into persona (nombre, email, oficina_id) VALUES (?, ?, ?)";
+    db.query(query, [nombre, email, oficina_id], function(err) {
         if (err) {
             console.log(err);
             return;
@@ -124,6 +125,56 @@ const postAgregarOficina = function(req, res, next) {
     })
 }
 
+const getEditarOficina = function(req, res, next) {
+    var db = req.app.get('db');
+    var id = req.params.id;
+    db.query("SELECT * FROM oficina WHERE id=(?)", [id], function(err, rows) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        res.render('editOficina', { item: rows[0], title: "Editar" });
+    });
+}
+
+const postUpdateOficina= function(req, res, next) {
+    var db = req.app.get('db');
+    var id = req.params.id;
+    var denominacion = req.body.denominacion;
+     // Obtén la descripción del formulario
+    db.query("UPDATE oficina SET denominacion=? WHERE id=?", [denominacion, id], function(err) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        res.redirect('/oficinas');
+    });
+}
+
+const getDeleteOficina = (req, res, next) => {
+    var db = req.app.get('db');
+    var id = req.params.id;
+    db.query("SELECT * FROM oficina WHERE id=?", id, function(err, rows) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        res.render('borrarOficina', { item: rows[0], title: "Borrar" });
+    });
+}
+
+const postDeleteOficina= function(req, res, next) {
+    var db = req.app.get('db');
+    var id = req.params.id;
+    db.query("DELETE FROM oficina WHERE id=?", id, function(err) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        res.redirect('/oficinas');
+    });
+}
+
 
 module.exports = {
     listPersonas,
@@ -137,5 +188,9 @@ module.exports = {
     buscarPersonaResultados,
     listOficinas,
     agregarOficina,
-    postAgregarOficina
+    postAgregarOficina,
+    getEditarOficina,
+    postUpdateOficina,
+    getDeleteOficina,
+    postDeleteOficina
 };
