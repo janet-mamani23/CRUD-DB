@@ -53,7 +53,7 @@ db.connect((err) => {
          id INT AUTO_INCREMENT PRIMARY KEY,
          nombre VARCHAR(255),
          email VARCHAR(255),
-         oficina_id INT,
+         oficina_id INT, 
          FOREIGN KEY (oficina_id) REFERENCES oficina(id)
      )
 `;
