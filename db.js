@@ -16,7 +16,7 @@ db.connect((err) => {
     }
 
     // Verificar si existe la base de datos
-    db.query("CREATE DATABASE IF NOT EXISTS cruddb", (err) => {
+    db.query("CREATE DATABASE IF NOT EXISTS crudDBS", (err) => {
         if (err) {
             console.log("Error al crear la db");
             return;
@@ -25,7 +25,7 @@ db.connect((err) => {
     });
 
     // Seleccionar base de datos
-    db.query("USE cruddb", (err) => {
+    db.query("USE crudDBS ", (err) => {
         if (err) {
             console.log("Error al seleccionar la db");
             return;

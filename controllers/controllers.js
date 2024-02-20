@@ -48,8 +48,9 @@ const postUpdatePersona = function(req, res, next) {
     var db = req.app.get('db');
     var id = req.params.id;
     var nombre = req.body.nombre;
-    var email = req.body.email; // Obtén la descripción del formulario
-    db.query("UPDATE persona SET nombre=?, email=? WHERE id=?", [nombre, email, id], function(err) {
+    var email = req.body.email;
+    var oficina_id = req.body.oficina_id // Obtén la descripción del formulario
+    db.query("UPDATE persona SET nombre=?, email=?, oficina_id =? WHERE id=?", [nombre, email,oficina_id, id], function(err) {
         if (err) {
             console.error(err);
             return;
@@ -83,16 +84,16 @@ const postDeletePersona = function(req, res, next) {
 }
 
 const buscarPersona = (req, res, next) => {
-    res.render('busqueda', { title: "Buscar" });
+    res.render('busqueda', { title: "Buscar Persona" });
 }
 
 const buscarPersonaResultados = (req, res, next) => {
     const db = req.app.get("db");
     const keyword = req.body.keyword;
-    const query = 'SELECT * FROM persona WHERE nombre LIKE ?';
+    const query = 'SELECT persona.nombre, persona.email, oficina.denominacion FROM persona JOIN oficina ON persona.oficina_id = oficina.id WHERE nombre LIKE ?';
     db.query(query, [`%${keyword}%`], (err, rows) => {
         if (err) throw err;
-        res.render('resultados', { personas: rows, title: "Resultados" })
+        res.render('resultados', { personas: rows, title: "Resultados encontrados" })
     });
 }
 
