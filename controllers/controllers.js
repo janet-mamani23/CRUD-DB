@@ -2,7 +2,7 @@ var express = require('express');
 
 const listPersonas = (req, res, next) => {
     const db = req.app.get("db");
-    const query ="SELECT persona.nombre, persona.email, oficina.denominacion FROM persona JOIN oficina ON persona.oficina_id = oficina.id";
+    const query ="SELECT persona.id, persona.nombre, persona.email, oficina.denominacion FROM persona JOIN oficina ON persona.oficina_id = oficina.id";
     db.query(query, function(err, rows) {
         if (err) {
             console.log(err);
@@ -30,19 +30,19 @@ const postAgregarPersona = function(req, res, next) {
         }
         res.redirect("/personas");
     })
-}
+};
 
 const getEditarPersona = function(req, res, next) {
     var db = req.app.get('db');
     var id = req.params.id;
-    db.query("SELECT * FROM persona WHERE id=(?)", [id], function(err, rows) {
+    db.query("SELECT * FROM persona WHERE id = ?", [id], function(err, rows) {
         if (err) {
             console.error(err);
             return;
         }
         res.render('edit', { item: rows[0], title: "Editar" });
     });
-}
+};
 
 const postUpdatePersona = function(req, res, next) {
     var db = req.app.get('db');
@@ -57,7 +57,7 @@ const postUpdatePersona = function(req, res, next) {
         }
         res.redirect('/personas');
     });
-}
+};
 
 const getDeletePersona = (req, res, next) => {
     var db = req.app.get('db');
@@ -69,7 +69,7 @@ const getDeletePersona = (req, res, next) => {
         }
         res.render('borrar', { item: rows[0], title: "Borrar" });
     });
-}
+};
 
 const postDeletePersona = function(req, res, next) {
     var db = req.app.get('db');
@@ -81,11 +81,11 @@ const postDeletePersona = function(req, res, next) {
         }
         res.redirect('/personas');
     });
-}
+};
 
 const buscarPersona = (req, res, next) => {
     res.render('busqueda', { title: "Buscar Persona" });
-}
+};
 
 const buscarPersonaResultados = (req, res, next) => {
     const db = req.app.get("db");
@@ -95,7 +95,7 @@ const buscarPersonaResultados = (req, res, next) => {
         if (err) throw err;
         res.render('resultados', { personas: rows, title: "Resultados encontrados" })
     });
-}
+};
 
 const listOficinas = (req, res, next) => {
     const db = req.app.get("db");
@@ -108,10 +108,10 @@ const listOficinas = (req, res, next) => {
         res.render("oficinas", { oficinas: rows, title: "Lista" });
     })
     //const query = "SELECT * from persona";
-}
+};
 const agregarOficina = function(req, res, next) {
     res.render('agregarOficina', { title: "Agregar" });
-}
+};
 
 const postAgregarOficina = function(req, res, next) {
     const db = req.app.get("db");
@@ -124,7 +124,7 @@ const postAgregarOficina = function(req, res, next) {
         }
         res.redirect("/oficinas");
     })
-}
+};
 
 const getEditarOficina = function(req, res, next) {
     var db = req.app.get('db');
@@ -136,7 +136,7 @@ const getEditarOficina = function(req, res, next) {
         }
         res.render('editOficina', { item: rows[0], title: "Editar" });
     });
-}
+};
 
 const postUpdateOficina= function(req, res, next) {
     var db = req.app.get('db');
@@ -150,7 +150,7 @@ const postUpdateOficina= function(req, res, next) {
         }
         res.redirect('/oficinas');
     });
-}
+};
 
 const getDeleteOficina = (req, res, next) => {
     var db = req.app.get('db');
@@ -162,7 +162,7 @@ const getDeleteOficina = (req, res, next) => {
         }
         res.render('borrarOficina', { item: rows[0], title: "Borrar" });
     });
-}
+};
 
 const postDeleteOficina= function(req, res, next) {
     var db = req.app.get('db');
@@ -174,7 +174,7 @@ const postDeleteOficina= function(req, res, next) {
         }
         res.redirect('/oficinas');
     });
-}
+};
 
 
 module.exports = {
