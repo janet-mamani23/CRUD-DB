@@ -1,21 +1,21 @@
 version: '3'
 services:
   # Servicio de MySQL
-  mysql:
-    image: mysql:8.0
-    container_name: mi_mysql
+  mysql: #nombre sel servicio
+    image: mysql:8.0   # especificamos la image  del docker que se va a utilizar
+    container_name: mi_mysql #definimos el nombre del contenedor
     environment:
-      MYSQL_ROOT_PASSWORD: 2103     
-    volumes:
+      MYSQL_ROOT_PASSWORD: 2103  #le establesemos la contraseña del usuario root del de MYSQL   
+    volumes: 
       - mysql_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
-    networks:
+    ports: # mapeo el puerto del contenedor al puerto del host
+      - "3306:3306" 
+    networks: #especifica a que redes docker se debe conectar el contenedor
       - my_network
 
 
-volumes:
+volumes: #definimos el volumes para que los datos de MYSQL persitan fuera del contenedor y tambien se utilizara en la app
   mysql_data:
 
-networks:
+networks: #definimos las redes que se utilizaran en la APP para conectar diferentes contenedores si y/o con el host
   my_network:

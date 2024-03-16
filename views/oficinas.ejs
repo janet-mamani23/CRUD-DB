@@ -5,7 +5,7 @@
 
     <body>
         <%- include('./navigation.ejs') %>
-            <h1>Lista de oficinas</h1>
+            <h1> <%= title %> </h1>
             <form action="/agregarOficina" method="post">
                 <input type="text" name="denominacion" placeholder="Oficina">
                 <button type="submit">Agregar</button>
@@ -17,9 +17,9 @@
                             <%= element.denominacion %>
                         </div>
                         <div class="col-md-4 mt-4">
-                            <a class="btn btn-primary" href="/editOficina/<%= element.id %>" role="button">Editar</a>
+                            <a class="btn btn-primary" href="/editOficina/<%= element.id %>" role="button">Editar</a> 
                             <a class="btn btn-primary" href="/deleteOficina/<%= element.id %>" role="button">Borrar</a>
-                        </div>
+                        </div> <!--enlaces de botones, cuando se hacen clic, llevan al usuario a las páginas donde pueden editar o borrar una oficina específica, dependiendo del ID proporcionado en element.id.-->
                     </div>
                     <% }) %>
 

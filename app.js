@@ -8,12 +8,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
-var db = require('./db');
+var db = require('./db'); //importa el modulo db que contiene la configuracion y logica para la BD
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.set("db", db);
+app.set("db", db);  //se almacena la configuracion de un objeto de base de datos para luego acceder a ella.
 
 app.use(logger('dev'));
 app.use(express.json());

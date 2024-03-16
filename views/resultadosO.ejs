@@ -9,11 +9,9 @@
             <%= title %>
         </h1>
         <ul>
-            <% personas.forEach(element => { %>
+            <% oficinas.forEach(element => { %>
                 <li>
-                  <p>Nombre: <%= element.nombre  %></p> 
-                  <p>Email: <%= element.email %></p> 
-                  <p>Oficina: <%= element.denominacion %></p>
+                  <p>Oficina: <%= element.denominacion  %></p> 
 
                 </li>
                 <% }) %>

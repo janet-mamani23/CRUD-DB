@@ -4,14 +4,17 @@
 <%- include('./head.ejs') %>
 
     <body>
-        <h1>Agregar persona</h1>
-        <form action="/agregar" method="post">
+        <h1> <%= title %> </h1>     
+        <form action="/agregar" method="post">  <!--action: especifica la ruta de envio y post: metodo de envio  de los datos al servidor-->
             <input type="text" name="nombre" placeholder="Nombre">
             <input type="email" name="email" placeholder="E mail">
-            <input type="number" name="oficina_id" placeholder="Oficina">
+            <input type="number" name="oficina_id" placeholder="Oficina">  
 
-            <button type="submit">Agregar</button>
+
+
+            <button type="submit">Agregar</button>  <!--boton de envio que permite al usuario enviar formulario al servidor-->
         </form>
     </body>
 
 </html>
+

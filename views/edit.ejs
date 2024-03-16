@@ -4,12 +4,12 @@
 <%- include('./head.ejs') %>
 
     <body>
-        <h1>Editar Persona</h1>
+        <h1> <%= title %> </h1>
         <form action="/update/<%= item.id %>" method="post">
             <input type="text" name="nombre" value="<%= item.nombre %>" required>
             <input type="text" name="email" value="<%= item.email %>" required>
             <input type="number" name="oficina_id" value="<%= item.oficina_id %>" required>
-            <!-- Nuevo campo -->
+            <!-- required: significa que ese campo es obligatorio -->
             <button type="submit">Update</button>
         </form>
     </body>

@@ -4,7 +4,7 @@
 <%- include('./head.ejs') %>
 
     <body>
-        <h1>Agregar oficina</h1>
+        <h1> <%= title %> </h1>
         <form action="/agregarOficina" method="post">
             <input type="text" name="denominacion" placeholder="Oficina">
             <button type="submit">Agregar</button>

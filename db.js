@@ -1,7 +1,7 @@
 
 const mysql = require('mysql2');
 
-const db = mysql.createConnection({
+const db = mysql.createConnection({ //crea la conexion a la BD de MYSQL
     host: 'localhost',
     //host: 'mysql',
     user: 'root',
@@ -16,7 +16,7 @@ db.connect((err) => {
     }
 
     // Verificar si existe la base de datos
-    db.query("CREATE DATABASE IF NOT EXISTS cruddb6", (err) => {
+    db.query("CREATE DATABASE IF NOT EXISTS crudDB", (err) => {
         if (err) {
             console.log("Error al crear la db");
             return;
@@ -25,7 +25,7 @@ db.connect((err) => {
     });
 
     // Seleccionar base de datos
-    db.query("USE cruddb6 ", (err) => {
+    db.query("USE crudDB ", (err) => {
         if (err) {
             console.log("Error al seleccionar la db");
             return;
@@ -67,4 +67,4 @@ db.connect((err) => {
 
 });
 
-module.exports = db;
+module.exports = db; //exporta el objeto de conexion db
